@@ -49,9 +49,10 @@ class RecursionFibonacci
 			Result[n] = fib_with_recursion_memoization(n-1) + fib_with_recursion_memoization(n-2)
 	end
 
+# removes all the nested arrays in a array
+	def flatten(arr) 
 
-
-
+	end
 end
 
 #Test cases
