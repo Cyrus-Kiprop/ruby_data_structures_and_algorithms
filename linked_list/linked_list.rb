@@ -45,7 +45,7 @@ class LinkedList
   end
 
 
-  def display
+  def print
     node = @head
     list = []
 
@@ -57,16 +57,26 @@ class LinkedList
     list
   end
 
-  # private
+  def add_at(index, item )
+    node = get_node(index)
+    return if node.nil?
+    new_node = Node.new(item)
+    new_node.next_node = node.next_node
+    node.next_node = new_node
+    @tail = new_node if (@tail == node)
+  end
+
+  private
 
   def get_node(index)
     node = @head
     counter = 0
 
-    while (node = node.next_node)
-      return node if (counter == index-1)
+    while node && counter < index
+      node = node.next_node
       counter += 1
     end
+     node
   end
 
 
@@ -76,6 +86,6 @@ end
 list = LinkedList.new
 list.add(3)
 list.add(5)
+list.add_at(0,4)
 
-p list.display
-p list.get_node(1).value
+p list.print
