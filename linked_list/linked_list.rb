@@ -58,12 +58,20 @@ attr_reader :tail
   end
 
   def add_at(index, item )
-    node = get_node(index)
-    return if node.nil?
     new_node = Node.new(item)
-    new_node.next_node = node.next_node
-    node.next_node = new_node
-    @tail = new_node if (@tail == node)
+    if index == 0
+      new_node.next_node = @head
+      @head = new_node
+      @tail = @head.next_node if @tail = @head
+    else
+      prev_node = previous_node(index)
+      current = prev_node.next_node
+      return if prev_node.nil?
+
+      new_node.next_node = current
+      prev_node.next_node = new_node
+      @tail = new_node if (@tail == current)
+    end
   end
 
   def remove(index)
@@ -113,9 +121,7 @@ end
 list = LinkedList.new
 list.add(3)
 list.add(5)
-list.add_at(0,4)
-p list.tail
-p list.print
-p list.remove(2)
-p list.tail.value
+list.add_at(0,8)
+list.add_at(1,7)
+
 p list.print
